@@ -1,0 +1,101 @@
+{
+ "cleanUrls": true,
+ "rewrites": [
+  {
+   "source": "/",
+   "destination": "/api/pagina?t=home"
+  },
+  {
+   "source": "/privacidade",
+   "destination": "/api/pagina?t=privacidade"
+  },
+  {
+   "source": "/termos",
+   "destination": "/api/pagina?t=termos"
+  },
+  {
+   "source": "/acesso",
+   "destination": "/api/pagina?t=acesso"
+  },
+  {
+   "source": "/comprovativo",
+   "destination": "/api/pagina?t=comprovativo"
+  },
+  {
+   "source": "/sobre",
+   "destination": "/api/pagina?t=sobre"
+  },
+  {
+   "source": "/contactos",
+   "destination": "/api/pagina?t=contactos"
+  },
+  {
+   "source": "/blog",
+   "destination": "/api/pagina?t=blog"
+  },
+  {
+   "source": "/ler/:slug",
+   "destination": "/api/pagina?t=ler&slug=:slug"
+  },
+  {
+   "source": "/autor/:slug",
+   "destination": "/api/pagina?t=autor&slug=:slug"
+  },
+  {
+   "source": "/categoria/:slug",
+   "destination": "/api/pagina?t=categoria&slug=:slug"
+  },
+  {
+   "source": "/blog/:slug",
+   "destination": "/api/pagina?t=artigo&slug=:slug"
+  },
+  {
+   "source": "/sitemap.xml",
+   "destination": "/api/pagina?t=sitemap"
+  },
+  {
+   "source": "/robots.txt",
+   "destination": "/api/pagina?t=robots"
+  },
+  {
+   "source": "/:slug([a-z0-9-]+)",
+   "destination": "/api/pagina?t=livro&slug=:slug"
+  }
+ ],
+ "functions": {
+  "api/download.js": {
+   "maxDuration": 60
+  },
+  "api/leitura.js": {
+   "maxDuration": 60
+  }
+ },
+ "headers": [
+  {
+   "source": "/(.*)",
+   "headers": [
+    {
+     "key": "X-Content-Type-Options",
+     "value": "nosniff"
+    },
+    {
+     "key": "X-Frame-Options",
+     "value": "DENY"
+    },
+    {
+     "key": "Referrer-Policy",
+     "value": "strict-origin-when-cross-origin"
+    },
+    {
+     "key": "Permissions-Policy",
+     "value": "camera=(), microphone=(), geolocation=()"
+    },
+    {
+     "key": "Content-Security-Policy",
+     "value": "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co; worker-src 'self' blob: https://cdnjs.cloudflare.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me"
+    }
+   ]
+  }
+ ],
+ "trailingSlash": false
+}

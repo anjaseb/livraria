@@ -13,6 +13,7 @@ export const wa=n=>{let d=String(n||'').replace(/\D/g,'');if(d.length===9)d='244
 export const sha=s=>createHash('sha256').update(String(s)).digest('hex');
 export const json=(res,c,o)=>{res.setHeader('Cache-Control','no-store');res.status(c).json(o)};
 export const ip=req=>String(req.headers['x-forwarded-for']||'').split(',')[0].trim().slice(0,45);
+export const pagLinhas=c=>[['Entidade',c.pag_entidade],['Referência',c.pag_referencia],['Titular',c.pag_titular],['Banco',c.pag_banco],['IBAN',c.pag_iban],['Multicaixa Express',c.pag_express],['Outras formas de pagamento',c.pag_outro]].map(([k,v])=>[k,String(v||'').trim()]).filter(x=>x[1]);
 export const cfg=async()=>Object.fromEntries((await q('settings?select=key,value')).map(x=>[x.key,x.value]));
 // Código de acesso: 10 caracteres sem 0/1/I/L/O, formato XXXXX-XXXXX
 const AL='ABCDEFGHJKMNPQRSTUVWXYZ23456789';

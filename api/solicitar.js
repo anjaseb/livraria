@@ -1,4 +1,4 @@
-import {q,db,json,cfg,gerarCodigo,REGRAS} from './_lib.js';
+import {q,db,json,cfg,gerarCodigo,REGRAS,pagLinhas} from './_lib.js';
 export default async(req,res)=>{
 if(req.method!=='POST')return res.status(405).end();
 const {book_id,email,telefone,aceito}=req.body||{};
@@ -8,7 +8,7 @@ if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em))return json(res,400,{erro:'Email in
 if(!/^[+0-9 ()-]{7,20}$/.test(tel))return json(res,400,{erro:'Telefone inválido.'});
 const [b]=await q(`books?id=eq.${+book_id||0}&publicado=eq.true&select=id,titulo`);
 if(!b)return json(res,404,{erro:'Livro não encontrado.'});
-const c=await cfg(),base={instrucoes:c.instrucoes_pagamento||'',titulo:b.titulo};
+const c=await cfg(),base={instrucoes:[String(c.instrucoes_pagamento||'').trim(),...pagLinhas(c).map(([k,v])=>k+': '+v)].filter(Boolean).join('\n'),titulo:b.titulo};
 const ex=await q(`pedidos?email=eq.${encodeURIComponent(em)}&book_id=eq.${b.id}&estado=eq.pendente&select=id&limit=1`,process.env.SUPABASE_SERVICE_KEY);
 if(ex.length)return json(res,200,{...base,ref:'#'+String(ex[0].id).padStart(9,'0'),repetido:true});
 const h=new Date(Date.now()-3600000).toISOString();

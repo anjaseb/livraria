@@ -17,5 +17,5 @@ if(t==='ler')return out(res,P.ler(blog));
 if(t==='termos')return out(res,P.termos(c,blog));
 if(t==='privacidade')return out(res,P.privacidade(c,blog));
 if(t==='artigo'){const [a]=await q(`articles?slug=eq.${slug}&publicado=eq.true&select=*`);return a?out(res,P.artigo(a,blog)):out(res,P.nada(blog),404)}
-if(t==='livro'&&slug){const [b,o]=await Promise.all([q(`books?slug=eq.${slug}&publicado=eq.true&select=id,slug,titulo,autor,preco,categoria,descricao,isbn,capa_url,leitura_path,palavras,trecho,sobre_autor,criado`),q(`books?publicado=eq.true&slug=neq.${slug}&select=slug,titulo&order=criado.desc&limit=6`)]);return b[0]?out(res,P.livro(b[0],o,blog),200):out(res,P.nada(blog),404)}
+if(t==='livro'&&slug){const [b,o,st]=await Promise.all([q(`books?slug=eq.${slug}&publicado=eq.true&select=id,slug,titulo,autor,preco,categoria,descricao,isbn,capa_url,leitura_path,palavras,trecho,sobre_autor,criado`),q(`books?publicado=eq.true&slug=neq.${slug}&select=slug,titulo&order=criado.desc&limit=6`),q(`books?slug=eq.${slug}&publicado=eq.true&select=visualizacoes,curtidas`)]);if(b[0]&&st[0])Object.assign(b[0],st[0]);return b[0]?out(res,P.livro(b[0],o,blog),200):out(res,P.nada(blog),404)}
 out(res,P.nada(blog),404)};

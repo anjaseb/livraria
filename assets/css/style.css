@@ -33,3 +33,6 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{o
 .logo{display:flex;align-items:center;gap:10px}.logo b{color:var(--ouro)}.marca{width:36px;height:36px;flex:none}
 .mig{font-size:.9rem;opacity:.85;margin:16px 0 0}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}.chips a{border:1px solid var(--linha);border-radius:999px;padding:6px 14px;text-decoration:none}.chips a:hover{border-color:var(--tinta)}.by a{color:inherit}
 button.alt{background:transparent;color:var(--tinta);border:2px solid var(--tinta)}form button+button{margin-left:8px}form>div>button{width:auto}
+
+.pagbox{border:1px solid #d9dfdb;border-left:4px solid #e0b44e;background:#fbfaf4;border-radius:8px;padding:12px 14px;margin:12px 0}.pagbox h2{font-size:1.05rem;margin:0 0 6px}.pagbox p{margin:6px 0;overflow-wrap:anywhere}
+.stats{display:flex;align-items:center;gap:12px;margin:6px 0;color:#555;font-size:.92rem}.like{background:#fff;color:#8a2a2a;border:1px solid #d9b9b9;border-radius:999px;padding:4px 12px;cursor:pointer;font:inherit}.like.on{background:#8a2a2a;color:#fff;border-color:#8a2a2a}.like:disabled{opacity:.6}

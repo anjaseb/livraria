@@ -15,3 +15,8 @@ try{sessionStorage.lm_ref=j.ref;sessionStorage.lm_em=em}catch(e){}
 document.getElementById('cb').onclick=function(){LM.enviarComp(j.ref,em,document.getElementById('cf').files[0],document.getElementById('cm'))}};
 var s=document.getElementById('bq');if(s)s.onclick=function(){document.getElementById('d').open=true;document.getElementById('d').scrollIntoView({behavior:'smooth'})};
 var g=document.getElementById('bg'),gm=document.getElementById('gm');if(g)g.onclick=async function(){gm.textContent='A preparar o ficheiro...';var x=await fetch('/api/gratis?slug='+encodeURIComponent(SLUG)).then(function(r){return r.json()}).catch(function(){return null});if(!x||x.erro){gm.textContent=(x&&x.erro)||'Erro. Tente novamente.';return}gm.textContent='Download iniciado.';location.href=x.url};
+
+var nv=document.getElementById('nv'),lk=document.getElementById('lk'),nl=document.getElementById('nl');
+function ap(j){if(!j||j.erro)return;if(nv)nv.textContent=j.visualizacoes+(j.visualizacoes===1?' visualização':' visualizações');if(nl)nl.textContent=j.curtidas;if(lk){lk.setAttribute('aria-pressed',j.curtido?'true':'false');lk.classList.toggle('on',!!j.curtido)}}
+if(nv&&ID)LM.post('/api/estatisticas',{acao:'ver',book_id:ID,dispositivo:LM.dev()}).then(function(x){ap(x.j)});
+if(lk)lk.onclick=function(){lk.disabled=true;LM.post('/api/estatisticas',{acao:'curtir',book_id:ID,dispositivo:LM.dev()}).then(function(x){lk.disabled=false;ap(x.j)})};

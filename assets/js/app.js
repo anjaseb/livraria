@@ -21,6 +21,6 @@ if(!b.j||b.j.erro){out.textContent=(b.j&&b.j.erro)||'Erro. Tente novamente.';ret
 out.textContent='Comprovativo recebido. Assim que confirmarmos o pagamento, enviamos o código para o seu email.';return true},
 post:function(u,b){return fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){return{s:r.status,j:j}},function(){return{s:r.status,j:null}})},function(){return{s:0,j:null}})}};
 var ok=false;try{ok=localStorage.lm_ok==='1'}catch(e){}
-if(!ok){var a=document.createElement('div');a.id='aviso';a.innerHTML='<span>Este site guarda no seu dispositivo dados técnicos (página de leitura e, se usar um código, um identificador do dispositivo). Ao continuar, aceita a <a href="/privacidade">Privacidade</a> e os <a href="/termos">Termos</a>.</span><button type="button">Aceitar</button>';
+if(!ok){var a=document.createElement('div');a.id='aviso';a.innerHTML='<span>Este site guarda no seu dispositivo dados técnicos (página de leitura e um identificador do dispositivo, usado para contar visualizações e curtidas e para os códigos de acesso). Ao continuar, aceita a <a href="/privacidade">Privacidade</a> e os <a href="/termos">Termos</a>.</span><button type="button">Aceitar</button>';
 a.querySelector('button').onclick=function(){try{localStorage.lm_ok='1'}catch(e){}a.remove()};document.body.appendChild(a)}
 })();
